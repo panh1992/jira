@@ -54,6 +54,7 @@ export const List = ({ list, users }: ListProps) => {
         },
       ]}
       dataSource={list}
+      rowKey={(r) => r.id}
     />
   );
 };
