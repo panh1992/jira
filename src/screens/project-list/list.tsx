@@ -1,3 +1,4 @@
+import { Table } from "antd";
 import React from "react";
 import { User } from "./search-panel";
 
@@ -15,21 +16,26 @@ interface ListProps {
 
 export const List = ({ list, users }: ListProps) => {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>名称</th>
-          <th>负责人</th>
-        </tr>
-      </thead>
-      <tbody>
-        {list.map((p) => (
-          <tr key={p.id}>
-            <td>{p.name}</td>
-            <td>{users.find((u) => u.id === p.personId)?.name || "未知"}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <Table
+      pagination={false}
+      columns={[
+        {
+          title: "名称",
+          dataIndex: "name",
+          sorter: (a, b) => a.name.localeCompare(b.name),
+        },
+        {
+          title: "负责人",
+          render(value, project) {
+            return (
+              <span>
+                {users.find((u) => u.id === project.personId)?.name || "未知"}
+              </span>
+            );
+          },
+        },
+      ]}
+      dataSource={list}
+    />
   );
 };
