@@ -1,12 +1,12 @@
 import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
 import React from "react";
-import { User } from "./search-panel";
 import { Link } from "react-router-dom";
+import { User } from "./search-panel";
 export interface Project {
   id: number;
   name: string;
-  personId: string;
+  personId: number;
   organization: string;
   created: number;
 }
