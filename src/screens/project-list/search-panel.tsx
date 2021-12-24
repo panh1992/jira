@@ -47,7 +47,7 @@ export const SearchPanel = ({ param, setParam, users }: SearchPanelProps) => {
         >
           <Select.Option value={""}>负责人</Select.Option>
           {users.map((u) => (
-            <Select.Option key={u.id} value={u.id}>
+            <Select.Option key={u.id} value={String(u.id)}>
               {u.name}
             </Select.Option>
           ))}

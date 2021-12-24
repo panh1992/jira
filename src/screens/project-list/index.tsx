@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { List } from "./list";
 import { SearchPanel } from "./search-panel";
 import { useDebounce, useDocumentTitle } from "utils";
@@ -7,15 +6,13 @@ import styled from "@emotion/styled";
 import { Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
+import { useUrlQueryParam } from "utils/url";
 
 export const ProjectListScreen = () => {
-  const [param, setParam] = useState({
-    name: "",
-    personId: "",
-  });
-  const debouncedParam = useDebounce(param, 500);
   useDocumentTitle("项目列表");
-
+  // 基本类型 组件状态 可以放到依赖里
+  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
+  const debouncedParam = useDebounce(param, 500);
   const { isLoading, error, data: list } = useProjects(debouncedParam);
   const { data: users } = useUsers();
 

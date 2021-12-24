@@ -1,3 +1,4 @@
+import "./wdyr"; // <--- first import
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
@@ -5,13 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import { DevTools, loadServer } from "jira-dev-tool";
 import { AppProviders } from "./context";
 import "antd/dist/antd.less";
+import { ConfigProvider } from "antd";
+import zhCN from "antd/lib/locale/zh_CN";
 
 loadServer(() =>
   ReactDOM.render(
     <React.StrictMode>
       <AppProviders>
         <DevTools />
-        <App />
+        <ConfigProvider locale={zhCN}>
+          <App />
+        </ConfigProvider>
       </AppProviders>
     </React.StrictMode>,
     document.getElementById("root")
