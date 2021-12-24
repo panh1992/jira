@@ -53,3 +53,6 @@ export const useDocumentTitle = (
     };
   }, [keepOnUnmount, oldTitle]);
 };
+
+// 重置路由并刷新页面
+export const resetRoute = () => (window.location.href = window.location.origin);
