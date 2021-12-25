@@ -9,9 +9,45 @@ export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
 
   useEffect(() => {
-    run(client("projects", { data: cleanObject(param || {}) }));
+    run(client("/projects", { data: cleanObject(param || {}) }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [param]);
 
   return result;
+};
+
+export const useEditProject = () => {
+  const { run, ...asyncResut } = useAsync();
+  const client = useHttp();
+
+  const mutate = (params: Partial<Project>) => {
+    return run(
+      client(`/projects/${params.id}`, {
+        data: params,
+        method: "PATCH",
+      })
+    );
+  };
+  return {
+    mutate,
+    ...asyncResut,
+  };
+};
+
+export const useAddProject = () => {
+  const { run, ...asyncResut } = useAsync();
+  const client = useHttp();
+
+  const mutate = (params: Partial<Project>) => {
+    return run(
+      client(`/projects/${params.id}`, {
+        data: params,
+        method: "POST",
+      })
+    );
+  };
+  return {
+    mutate,
+    ...asyncResut,
+  };
 };

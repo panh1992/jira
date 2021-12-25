@@ -8,7 +8,7 @@ export const useUsers = (param?: Partial<User>) => {
   const client = useHttp();
 
   useMount(() => {
-    run(client("users"));
+    run(client("/users"));
   });
 
   return result;
