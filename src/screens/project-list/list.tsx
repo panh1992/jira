@@ -16,11 +16,13 @@ export interface Project {
 
 interface ListProps extends TableProps<Project> {
   users: User[];
+  refresh?: () => void;
 }
 
 export const List = ({ users, ...prpos }: ListProps) => {
   const { mutate } = useEditProject();
-  const pinProect = (id: number) => (pin: boolean) => mutate({ id, pin });
+  const pinProect = (id: number) => (pin: boolean) =>
+    mutate({ id, pin }).then(prpos.refresh);
 
   return (
     <Table

@@ -12,7 +12,12 @@ export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
   // 基本类型 组件状态 可以放到依赖里
   const [param, setParam] = useProjectsSearchParams();
-  const { isLoading, error, data: list } = useProjects(useDebounce(param, 500));
+  const {
+    isLoading,
+    error,
+    data: list,
+    retry,
+  } = useProjects(useDebounce(param, 500));
   const { data: users } = useUsers();
 
   return (
@@ -22,7 +27,12 @@ export const ProjectListScreen = () => {
       {error ? (
         <Typography.Text type="danger">{error.message}</Typography.Text>
       ) : null}
-      <List users={users || []} loading={isLoading} dataSource={list || []} />
+      <List
+        refresh={retry}
+        users={users || []}
+        loading={isLoading}
+        dataSource={list || []}
+      />
     </Container>
   );
 };

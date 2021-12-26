@@ -29,7 +29,11 @@ export const useDebounce = <T>(value: T, delay?: number) => {
   useEffect(() => {
     // 每次在value变化后, 设置一个定时器
     const timeout = setTimeout(() => setDebouncedValue(value), delay || 0);
-    // 每次在上一个useEffect 处理完以后再运行
+    /**
+     * useEffect的return函数相当于componentWillUnmount, 做一些清理的任务
+     * 在delay时间内clearTimeout(timeout)是清除之前的定时器
+     * return函数:页面卸载时执行, 或者执行本次effect时清除上一次执行的effect
+     */
     return () => clearTimeout(timeout);
   }, [value, delay]);
 
