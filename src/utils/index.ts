@@ -60,3 +60,20 @@ export const useDocumentTitle = (
 
 // 重置路由并刷新页面
 export const resetRoute = () => (window.location.href = window.location.origin);
+
+/**
+ * 返回组件的挂载状态,
+ * 如果还没挂载过已经挂载返回false , 反之true
+ */
+export const useMountedRef = () => {
+  const mountedRef = useRef(false);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  });
+
+  return mountedRef;
+};
