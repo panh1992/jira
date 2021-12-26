@@ -9,7 +9,7 @@ export class ErrorBoundary extends React.Component<
 > {
   state = { error: null };
 
-  static getDerivedStateFromError(error: Error): { error: Error } {
+  static getDerivedStateFromError(error: Error) {
     return { error };
   }
 
@@ -18,7 +18,7 @@ export class ErrorBoundary extends React.Component<
     const { fallbackRender, children } = this.props;
 
     if (error) {
-      return fallbackRender(error);
+      return fallbackRender({ error });
     }
     return children;
   }

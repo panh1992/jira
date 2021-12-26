@@ -6,6 +6,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEditProject } from "utils/project";
 import { User } from "./search-panel";
+import { useProjectModal } from "./util";
 export interface Project {
   id: number;
   name: string;
@@ -18,13 +19,12 @@ export interface Project {
 interface ListProps extends TableProps<Project> {
   users: User[];
   refresh?: () => void;
-  projectButton: JSX.Element;
 }
 
 export const List = ({ users, ...prpos }: ListProps) => {
   const { mutate } = useEditProject();
-  const pinProect = (id: number) => (pin: boolean) =>
-    mutate({ id, pin }).then(prpos.refresh);
+  const { open } = useProjectModal();
+  const pinProect = (id: number) => (pin: boolean) => mutate({ id, pin });
 
   return (
     <Table
@@ -81,7 +81,12 @@ export const List = ({ users, ...prpos }: ListProps) => {
               <Dropdown
                 overlay={
                   <Menu>
-                    <Menu.Item key={"edit"}>{prpos.projectButton}</Menu.Item>
+                    <Menu.Item key={"edit"}>
+                      <ButtonNoPadding type="link" onClick={open}>
+                        创建项目
+                      </ButtonNoPadding>
+                    </Menu.Item>
+                    <Menu.Item key={"delete"}>刪除</Menu.Item>
                   </Menu>
                 }
               >
