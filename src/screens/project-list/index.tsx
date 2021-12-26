@@ -3,12 +3,15 @@ import { List } from "./list";
 import { SearchPanel } from "./search-panel";
 import { useDebounce, useDocumentTitle } from "utils";
 import styled from "@emotion/styled";
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useProjectsSearchParams } from "./util";
+import { Row } from "components/lib";
 
-export const ProjectListScreen = () => {
+export const ProjectListScreen = (props: {
+  setProjectModalOpen: (value: React.SetStateAction<boolean>) => void;
+}) => {
   useDocumentTitle("项目列表", false);
   // 基本类型 组件状态 可以放到依赖里
   const [param, setParam] = useProjectsSearchParams();
@@ -22,7 +25,12 @@ export const ProjectListScreen = () => {
 
   return (
     <Container>
-      <h1>项目列表</h1>
+      <Row between={true}>
+        <h1>项目列表</h1>
+        <Button onClick={() => props.setProjectModalOpen(true)}>
+          创建项目
+        </Button>
+      </Row>
       <SearchPanel param={param} setParam={setParam} users={users || []} />
       {error ? (
         <Typography.Text type="danger">{error.message}</Typography.Text>
@@ -32,6 +40,7 @@ export const ProjectListScreen = () => {
         users={users || []}
         loading={isLoading}
         dataSource={list || []}
+        setProjectModalOpen={props.setProjectModalOpen}
       />
     </Container>
   );
