@@ -30,7 +30,7 @@ export const KanBanScreen = () => {
       {isLoading ? (
         <Spin size="large" />
       ) : (
-        <ColumnsContainer>
+        <ColumnsContainer className="scroll-content">
           {kanbans?.map((kanban) => (
             <KanbanColumn key={kanban.id} kanban={kanban} />
           ))}

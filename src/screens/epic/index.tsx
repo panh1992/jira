@@ -1,9 +1,10 @@
+import { ScreenContainer } from "components/lib";
 import React from "react";
 
 export const EpicScreen = () => {
   return (
-    <div>
+    <ScreenContainer>
       <h1>EpicScreen</h1>
-    </div>
+    </ScreenContainer>
   );
 };

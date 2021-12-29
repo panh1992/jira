@@ -31,7 +31,6 @@ export const SearchPanel = ({ param, setParam, users }: SearchPanelProps) => {
           value={param.personId}
           defaultOptionName="负责人"
           onChange={(value) => {
-            console.log(value);
             setParam({
               ...param,
               personId: value,

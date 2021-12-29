@@ -8,7 +8,6 @@ import { useTasksSearchParams } from "./util";
 
 export const SearchPanel = () => {
   const searchParams = useTasksSearchParams();
-  console.log(" searchParams =====> " + JSON.stringify(searchParams));
   const setSearchParams = useSetUrlSearchParam();
   const reset = () => {
     setSearchParams({

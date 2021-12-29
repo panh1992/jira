@@ -2,11 +2,10 @@ import React from "react";
 import { List } from "./list";
 import { SearchPanel } from "./search-panel";
 import { useDebounce, useDocumentTitle } from "utils";
-import styled from "@emotion/styled";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useProjectModal, useProjectsSearchParams } from "./util";
-import { ErrorBox, Row } from "components/lib";
+import { ErrorBox, Row, ScreenContainer } from "components/lib";
 import { Button } from "antd";
 
 export const ProjectListScreen = () => {
@@ -18,7 +17,7 @@ export const ProjectListScreen = () => {
   const { data: users } = useUsers();
 
   return (
-    <Container>
+    <ScreenContainer>
       <Row between={true}>
         <h1>项目列表</h1>
         <Button onClick={open}>创建项目</Button>
@@ -26,10 +25,6 @@ export const ProjectListScreen = () => {
       <SearchPanel param={param} setParam={setParam} users={users || []} />
       <ErrorBox error={error} />
       <List users={users || []} loading={isLoading} dataSource={list || []} />
-    </Container>
+    </ScreenContainer>
   );
 };
-
-const Container = styled.div`
-  padding: 3.2rem;
-`;
