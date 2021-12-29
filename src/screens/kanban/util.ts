@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSetUrlSearchParam, useUrlQueryParam } from "./../../utils/url";
+import { useUrlQueryParam } from "./../../utils/url";
 import { useProject } from "./../../utils/project";
 import { useLocation } from "react-router";
 
@@ -26,7 +26,7 @@ export const useTasksSearchParams = () => {
   return useMemo(
     () => ({
       projectId,
-      typeId: Number(param.tagId) || undefined,
+      typeId: Number(param.typeId) || undefined,
       processorId: Number(param.processorId) || undefined,
       tagId: Number(param.tagId) || undefined,
       name: param.name,
