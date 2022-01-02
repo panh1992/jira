@@ -5,8 +5,10 @@ import React from "react";
 import { useDocumentTitle } from "utils";
 import { useKanbans } from "utils/kanban";
 import { useTasks } from "utils/task";
+import { CreateKanban } from "./create-kanban";
 import { KanbanColumn } from "./kanban-column";
 import { SearchPanel } from "./search-panel";
+import { TaskModel } from "./task-model";
 import {
   useKanbanSearchParams,
   useProjectdInUrl,
@@ -14,7 +16,7 @@ import {
 } from "./util";
 
 export const KanBanScreen = () => {
-  useDocumentTitle("看板标题");
+  useDocumentTitle("看板列表");
 
   const { data: currentProject } = useProjectdInUrl();
   const { data: kanbans, isLoading: kanbanIsLoading } = useKanbans(
@@ -30,12 +32,14 @@ export const KanBanScreen = () => {
       {isLoading ? (
         <Spin size="large" />
       ) : (
-        <ColumnsContainer className="scroll-content">
+        <ColumnsContainer>
           {kanbans?.map((kanban) => (
             <KanbanColumn key={kanban.id} kanban={kanban} />
           ))}
+          <CreateKanban />
         </ColumnsContainer>
       )}
+      <TaskModel />
     </ScreenContainer>
   );
 };
